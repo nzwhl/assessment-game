@@ -1,0 +1,12 @@
+{
+  "name": "assessment-game",
+  "version": "1.0.0",
+  "description": "A simple static web app with an API.",
+  "scripts": {
+    "build": "echo 'No build step required. Static files are served as-is.'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
