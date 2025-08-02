@@ -8,24 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileNameDisplay = document.getElementById('file-name-display');
     const loadQuestionsSection = document.getElementById('load-questions-section');
     const questionsLoadedMessage = document.getElementById('questions-loaded-message');
-    const rulesTextarea = document.getElementById('rules-textarea');
-
-    // Load game rules
-    const customRules = localStorage.getItem('customGameRules');
-    if (customRules) {
-        rulesTextarea.value = customRules;
-        localStorage.removeItem('customGameRules'); // Use once, then clear
-    } else {
-        fetch('rules.txt')
-            .then(response => response.text())
-            .then(text => {
-                rulesTextarea.value = text;
-            })
-            .catch(error => {
-                console.error('Error loading rules.txt:', error);
-                rulesTextarea.value = 'Failed to load default rules.';
-            });
-    }
+    
     
 
     // Game section
