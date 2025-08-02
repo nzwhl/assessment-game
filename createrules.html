@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Game - Create Rules</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles for the creator page */
+        .creator-container {
+            display: flex;
+            gap: 30px;
+            width: 95%;
+            max-width: 1600px;
+            margin: 0 auto; /* Center the container */
+        }
+        .form-section {
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+        .form-section h2 {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div id="top-banner" style="background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); padding: 20px; text-align: center; color: white; font-size: 2.5em; font-weight: bold;">
+        VAD Team Skills Assessment
+    </div>
+    <div class="creator-container">
+        <div class="form-section">
+            <h2>Game Rules</h2>
+            <div class="form-group">
+                <label for="game-rules">Edit Game Rules</label>
+                <textarea id="game-rules" rows="10"></textarea>
+            </div>
+            <button id="download-rules" class="button-row button">Download Rules</button>
+            <button id="use-rules" class="button-row button">Use These Rules</button>
+            <hr style="margin-top: 20px;">
+            <div class="form-group">
+                <label for="upload-rules-file">Upload Rules from File</label>
+                <input type="file" id="upload-rules-file" accept=".txt">
+            </div>
+            <button id="upload-rules" class="button-row button">Upload Rules</button>
+        </div>
+    </div>
+    <script src="createrules.js"></script>
+</body>
+</html>
