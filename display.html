@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Game - Display</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="top-banner" style="background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); padding: 20px; text-align: center; color: white; font-size: 2.5em; font-weight: bold;">
+        VAD Team Skills Assessment
+    </div>
+    <div id="rules-container" style="display: block;"></div>
+
+    <div id="game-container" class="container" style="display: none;">
+        <h1 id="game-phase"></h1>
+        <div id="question-card">
+            <p id="question-text"></p>
+        </div>
+        <div id="players-container"></div>
+        <div id="point-scale-container">
+            <div id="point-scale">
+                <span>0</span>
+                <span>20</span>
+                <span>40</span>
+                <span>60</span>
+                <span>80</span>
+                <span>100</span>
+                <span>120</span>
+            </div>
+        </div>
+        <div id="score-table-container"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

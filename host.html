@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Game - Referee</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="top-banner" style="background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); padding: 20px; text-align: center; color: white; font-size: 2.5em; font-weight: bold;">
+        VAD Team Skills Assessment
+    </div>
+    <div class="container" style="margin-top: 80px;">
+        <h1>Referee Control Panel</h1>
+        
+        <div id="setup-section">
+            <h2>Game Setup</h2>
+
+            <div class="player-section">
+                <button id="edit-rules-btn">Edit Game Rules</button>
+            </div>
+
+            <div class="instructions-section">
+                <p><strong>Instructions:</strong></p>
+                <ol>
+                    <li><strong>Option 1 (Recommended):</strong> Use the <a href="assessment_importer.html" target="_blank">Assessment Importer</a> to convert your question sheet and start the game directly. The questions will be pre-loaded.</li>
+                    <li><strong>Option 2 (Manual):</strong> Use the "Load questions from JSON" section below to select your <code>questions.json</code> file.</li>
+                    <li>Add players to the game.</li>
+                    <li>Click "Start Game".</li>
+                </ol>
+            </div>
+
+            <div class="player-section">
+                <input type="text" id="player-name" placeholder="Enter player name">
+                <button id="add-player">Add Player</button>
+                <div id="player-list-container">
+                    <h3>Added Players:</h3>
+                    <ul id="player-list"></ul>
+                </div>
+            </div>
+
+            <div id="load-questions-container" class="player-section">
+                <div id="load-questions-section" style="display: block;">
+                    <h3>Load questions from JSON:</h3>
+                    <input type="file" id="json-file-input" accept=".json" style="display: none;">
+                    <button id="load-questions-button">Choose File</button>
+                    <span id="file-name-display"></span>
+                </div>
+                <div id="questions-loaded-message" style="display: none;">
+                    <p><strong>Questions have been pre-loaded from the importer.</strong></p>
+                </div>
+            </div>
+
+            <button id="start-game">Start Game</button>
+        </div>
+
+        <div id="rules-editor-section" style="display: none;">
+            <h2>Edit Game Rules</h2>
+            <textarea id="rules-textarea" rows="20" style="width: 100%;"></textarea>
+            <button id="save-rules">Save Rules</button>
+        </div>
+
+        <div id="game-section" style="display: none;">
+            <h2 id="current-phase"></h2>
+            <div id="question-display-box">
+                <div id="current-question">
+                    <h3>Question:</h3>
+                    <p id="ref-question"></p>
+                    <h3>Answer:</h3>
+                    <p id="ref-answer"></p>
+                </div>
+            </div>
+
+            <div id="player-controls-wrapper">
+                <div id="player-controls"></div>
+            </div>
+
+            <div class="button-row top-buttons">
+                <button id="prev-question">Previous</button>
+                <button id="show-answer">Show Answer</button>
+                <button id="next-question">Next</button>
+            </div>
+            <div class="button-row bottom-buttons">
+                <button id="show-score">Show Score</button>
+                <button id="end-game">End Game</button>
+            </div>
+        </div>
+    </div>
+    <script src="host.js"></script>
+</body>
+</html>

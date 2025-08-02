@@ -1,0 +1,23 @@
+[Start]
+- Each player chooses their favorite letter (A-Z).
+- If there's a tie, they choose a number to decide the order.
+- A sequence order is created to start the game.
+
+[Warm-up]
+- Each player starts with 60 points.
+- About 20 questions. Players "raise hands" to answer.
+- Correct: **+10 points**.
+- Incorrect: **-10 points**.
+- Referee adds/deducts points.
+
+[Assessment Session]
+- Questions have pre-defined point values.
+- Players answer in the established sequence.
+- Correct answer gains points. Wrong answer loses points.
+- You can nominate another player to help. If they answer correctly, the helper gets the points; otherwise, both lose points.
+
+[Punishment]
+- The bottom four players (as a group) will choose a "TASK" for further development.
+
+[Rewards]
+- Players with 120 or more points can relax and don't need to answer more questions.

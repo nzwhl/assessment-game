@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Game - Importer</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .importer-container {
+            width: 80%;
+            max-width: 1000px;
+            margin: 0 auto; /* Center the container */
+        }
+        .upload-section, .sheets-section, .preview-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #sheet-buttons button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #007bff;
+            background-color: white;
+            color: #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        #sheet-buttons button:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        #sheet-buttons button.active {
+            background-color: #0056b3;
+            color: white;
+            border-color: #0056b3;
+        }
+        #json-preview {
+            background-color: #2b2b2b;
+            color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        #download-json {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Hidden by default */
+        }
+        #download-json:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div id="top-banner" style="background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); padding: 20px; text-align: center; color: white; font-size: 2.5em; font-weight: bold;">
+        VAD Team Skills Assessment
+    </div>
+    <div class="importer-container">
+        <h1>Assessment Question Importer</h1>
+
+        <div class="upload-section">
+            <h2>Step 1: Upload .xlsx File</h2>
+            <input type="file" id="xlsx-file" accept=".xlsx, .xls">
+        </div>
+
+        <div id="sheets-section" class="sheets-section" style="display: none;">
+            <h2>Step 2: Select a Sheet</h2>
+            <div id="sheet-buttons"></div>
+        </div>
+
+        <div id="preview-section" class="preview-section" style="display: none;">
+            <h2>Step 3: Preview and Download JSON</h2>
+            <pre id="json-preview"></pre>
+            <button id="start-game" class="button-row button">Start Game Now</button>
+            <button id="download-json">Download JSON for Later</button>
+        </div>
+
+    </div>
+
+    <!-- SheetJS library -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="import.js"></script>
+</body>
+</html>

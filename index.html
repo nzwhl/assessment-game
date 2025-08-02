@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Game - Welcome</title>
+    
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: block; /* Override flex from style.css */
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+        .section {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .link-section {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for responsiveness */
+            gap: 15px;
+            justify-content: center; /* Center items when they wrap */
+        }
+        .link-box {
+            flex: 1 1 calc(33% - 15px); /* Three columns, with gap, allows wrapping */
+            min-width: 250px; /* Minimum width for smaller screens */
+            background-color: #e9f7ff;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #cceeff;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            text-align: center; /* Center text within the box */
+        }
+        .link-box h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .link-box a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .link-box a:hover {
+            background-color: #0056b3;
+        }
+        ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div style="background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); padding: 20px; text-align: center; color: white; font-size: 2.5em; font-weight: bold; margin-bottom: 20px; border-radius: 8px;">
+        VAD Team Skills Assessment
+    </div>
+    <h1>Welcome to the Assessment Game!</h1>
+
+    <div class="section">
+        <p>This is an interactive game designed to facilitate engaging assessment sessions, whether for warm-ups or more formal evaluations. It allows for dynamic question display, player tracking, and score management.</p>
+    </div>
+
+    <div class="section">
+        <h2>Preparing Your Questions</h2>
+        <p>Questions for the game are loaded from a JSON file. You can either create this file manually or use the provided importer tool.</p>
+        <ol>
+            <li><strong>Manual JSON:</strong> Create a <code>questions.json</code> file in the same directory as the game files. The structure should be an array of question objects, each with properties like <code>question</code>, <code>answer</code>, <code>type</code> (e.g., "warmup", "assessment", "intro-card"), <code>points</code>, and optionally <code>options</code> for multiple-choice questions.</li>
+            <li><strong>Using the Importer:</strong> For easier question preparation, use the <a href="import.html" target="_blank">Assessment Importer</a>. This tool helps you convert questions from a spreadsheet format (e.g., Excel) into the required JSON structure.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Running the Game</h2>
+        <p>To run the game, you need a local web server. If you're using Python, navigate to the game directory in your terminal and run <code>python -m http.server 8000</code>. Then, open the following links in your browser:</p>
+        <ol>
+            <li><strong>Host Page:</strong> This is for the game referee or host to control the flow of the game, add players, load questions, and manage scores.</li>
+            <li><strong>Display Page:</strong> This page is meant to be shown to the audience or players, displaying the current question, player progress, and scores.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Functional Pages</h2>
+        <div class="link-section">
+            <div class="link-box">
+                <h3>Host Control Panel</h3>
+                <p>The main interface for the game administrator. From here, you can add players, load questions, navigate through questions, show/hide answers, and manage player scores.</p>
+                <a href="host.html" target="_blank">Go to Host Page</a>
+            </div>
+            <div class="link-box">
+                <h3>Game Display</h3>
+                <p>This page is for the audience. It dynamically updates to show the current question, player progress bars, and the score table. It's designed to be projected or shared.</p>
+                <a href="display.html" target="_blank">Go to Display Page</a>
+            </div>
+            <div class="link-box">
+                <h3>Assessment Importer</h3>
+                <p>A utility to help you convert your question data (e.g., from a spreadsheet) into the JSON format required by the game. Simplifies question setup.</p>
+                <a href="import.html" target="_blank">Go to Importer</a>
+            </div>
+            <div class="link-box">
+                <h3>Create Questions (Legacy)</h3>
+                <p>An older interface for manually creating questions. The Importer is generally recommended for bulk question entry.</p>
+                <a href="create.html" target="_blank">Go to Create Questions</a>
+            </div>
+            <div class="link-box">
+                <h3>Game Rules</h3>
+                <p>Displays the rules of the assessment game. This page is also loaded into the Display page when a game is not active.</p>
+                <a href="rules.html" target="_blank">Go to Rules</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

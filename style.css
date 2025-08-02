@@ -1,0 +1,441 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 120px; /* Space for the fixed banner */
+}
+
+#top-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 2.5em;
+    font-weight: bold;
+    z-index: 1000; /* Ensure banner is on top of other content */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.container {
+    text-align: center;
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto 0 auto; /* Adjusted margin-top, removed margin-bottom */
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Referee Page Specific Styles */
+#setup-section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+#setup-section h2 {
+    margin-top: 0;
+}
+
+#setup-section input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#setup-section button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#setup-section button:hover {
+    background-color: #0056b3;
+}
+
+#player-list-container {
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+#player-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#player-list li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#player-list li span {
+    flex-grow: 1;
+}
+
+#player-list li button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #6c757d; /* Muted color for Up/Down/Delete */
+    color: white;
+}
+
+#player-list li button:hover {
+    background-color: #5a6268;
+}
+
+#player-list li button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Start Game Button Specific */
+button#start-game {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button#start-game:hover {
+    background-color: #218838;
+}
+
+/* File Input Section */
+.file-input-section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+}
+
+.file-input-section label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.file-input-section input[type="file"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Game Section Player Controls */
+#player-controls-wrapper {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+#question-display-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+#current-question h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+#current-question p {
+    margin-bottom: 10px;
+}
+
+.question-points {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 10px;
+}
+
+#player-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#player-controls > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+#player-controls strong {
+    flex-basis: 120px; /* Fixed width for player name */
+    text-align: left;
+}
+
+#player-controls button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+}
+
+#player-controls button:hover {
+    background-color: #0056b3;
+}
+
+#player-controls input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.button-row button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-row button:hover {
+    background-color: #0056b3;
+}
+
+/* Game Board Specific Styles */
+#game-phase {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+#question-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#question-text {
+    font-size: 1.5em;
+}
+
+.options-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.options-list li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.correct-answer {
+    background-color: #d4edda; /* Light green background */
+    border-color: #28a745; /* Green border */
+    color: #155724; /* Dark green text */
+}
+
+.answer-text {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+#players-container {
+    margin-top: 50px; /* Adds space between questions and player bars */
+}
+
+.player-row {
+    margin-bottom: 15px;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.player-name-display {
+    font-weight: bold;
+    margin-right: 10px;
+    width: 100px; /* Align the bars */
+    text-align: right;
+}
+
+.progress-bar-container {
+    flex-grow: 1;
+    height: 25px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, #f7cac9, #92a8d1, #88b04b, #f7786b, #f2b5b5, #b5eAD7, #e6e6fa);
+    border-radius: 5px;
+    width: 100%; /* The gradient is always full width */
+}
+
+.player-avatar-marker {
+    position: absolute;
+    top: -5px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-align: center;
+    line-height: 32px;
+    color: white;
+    font-weight: bold;
+    transition: left 0.5s ease-in-out;
+}
+
+#point-scale-container {
+    padding-left: 110px; /* Align with the start of the progress bars */
+}
+
+#point-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Score Table Styles */
+.score-table {
+    width: 80%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: white;
+}
+
+.score-table th,
+.score-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.score-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.score-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.score-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.bottom-four {
+    background-color: #ffdddd; /* Light red for bottom four */
+    font-weight: bold;
+}
+
+/* Style for the pre-loaded questions message */
+#questions-loaded-message {
+    background-color: #d4edda; /* Light green background */
+    border: 1px solid #c3e6cb; /* Green border */
+    color: #155724; /* Dark green text */
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Styles for the instructions section */
+.instructions-section {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px; /* Added gap */
+    padding: 15px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #dee2e6; /* Grey border */
+    border-radius: 8px;
+}
+
+.instructions-section p {
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.instructions-section ol {
+    margin-bottom: 0;
+    padding-left: 20px; /* Indent the list */
+}
+
+.player-section {
+    text-align: left;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa; /* Light grey background */
+    border: 1px solid #dee2e6; /* Grey border */
+    border-radius: 8px;
+}

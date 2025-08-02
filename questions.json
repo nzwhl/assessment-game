@@ -1,0 +1,42 @@
+[
+  {
+    "type": "intro-warmup",
+    "question": "Warm-up Round",
+    "points": 0
+  },
+  {
+    "type": "warmup",
+    "question": "SAFe Core Values – Alignment, Transparency, Respect for People, Relentless Improvement. Which of the below matches with Alignment?",
+    "options": [
+        "Turn mistakes into learning moments",
+        "Create a constant sense of urgency",
+        "Value Diversity of people and opinions",
+        "Communicate the Vision, mission and strategy"
+    ],
+    "answer": "Communicate the Vision, mission and strategy",
+    "points": 10
+  },
+  {
+    "type": "warmup",
+    "question": "What is the primary responsibility of the Product Owner (sometimes known as the Value Maximiser) in a SAFe Agile Team?",
+    "answer": "Defining, prioritizing, and maintaining the team backlog",
+    "points": 10
+  },
+  {
+    "type": "intro-assessment",
+    "question": "Assessment Phase",
+    "points": 0
+  },
+  {
+    "type": "assessment",
+    "question": "Describe and demonstrate how to create a pull request (simple)",
+    "answer": "Key points: Create branch, commit changes, push branch, open PR in Azure DevOps.",
+    "points": 10
+  },
+  {
+    "type": "assessment",
+    "question": "Describe the process of adding a new application to the EVD image build. (Moderate)",
+    "answer": "Key points: Request approval, obtain source media, create package, test deployment, release to production.",
+    "points": 20
+  }
+]
