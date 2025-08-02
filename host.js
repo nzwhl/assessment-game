@@ -8,9 +8,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileNameDisplay = document.getElementById('file-name-display');
     const loadQuestionsSection = document.getElementById('load-questions-section');
     const questionsLoadedMessage = document.getElementById('questions-loaded-message');
-    const rulesEditorSection = document.getElementById('rules-editor-section');
     const rulesTextarea = document.getElementById('rules-textarea');
-    const saveRulesButton = document.getElementById('save-rules');
+
+    // Load game rules
+    const customRules = localStorage.getItem('customGameRules');
+    if (customRules) {
+        rulesTextarea.value = customRules;
+        localStorage.removeItem('customGameRules'); // Use once, then clear
+    } else {
+        fetch('rules.txt')
+            .then(response => response.text())
+            .then(text => {
+                rulesTextarea.value = text;
+            })
+            .catch(error => {
+                console.error('Error loading rules.txt:', error);
+                rulesTextarea.value = 'Failed to load default rules.';
+            });
+    }
+    
 
     // Game section
     const setupSection = document.getElementById('setup-section');
@@ -300,39 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function showRulesEditor() {
-        setupSection.style.display = 'none';
-        gameSection.style.display = 'none';
-        rulesEditorSection.style.display = 'block';
-        fetch('rules.txt')
-            .then(response => response.text())
-            .then(text => {
-                rulesTextarea.value = text;
-            });
-    }
-
-    saveRulesButton.addEventListener('click', () => {
-        const newRules = rulesTextarea.value;
-        fetch('/api/SaveRules', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'text/plain'
-            },
-            body: newRules
-        })
-        .then(response => response.text())
-        .then(data => {
-            alert(data);
-            // Hide the editor and show the setup section again
-            rulesEditorSection.style.display = 'none';
-            setupSection.style.display = 'block';
-        })
-        .catch(error => {
-            console.error('Error saving rules:', error);
-            alert('Error saving rules. See console for details.');
-        });
+    editRulesButton.addEventListener('click', () => {
+        window.location.href = 'create.html';
     });
-
-    const editRulesButton = document.getElementById('edit-rules-btn');
-    editRulesButton.addEventListener('click', showRulesEditor);
 });
