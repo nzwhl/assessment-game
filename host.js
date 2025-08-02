@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileNameDisplay = document.getElementById('file-name-display');
     const loadQuestionsSection = document.getElementById('load-questions-section');
     const questionsLoadedMessage = document.getElementById('questions-loaded-message');
-    
-    
 
     // Game section
     const setupSection = document.getElementById('setup-section');
@@ -297,9 +295,5 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.clear();
             location.reload();
         }
-    });
-
-    editRulesButton.addEventListener('click', () => {
-        window.location.href = 'create.html';
     });
 });

@@ -35,32 +35,46 @@
 </head>
 <body>
     <h1>Game Rules</h1>
-    <div class="rules-container" id="rules-container">
+    <div class="rules-container">
+        <div class="rule-box">
+            <h2>Start</h2>
+            <ul>
+                <li>Each player chooses their favorite letter (A-Z).</li>
+                <li>If there's a tie, they choose a number to decide the order.</li>
+                <li>A sequence order is created to start the game.</li>
+            </ul>
+        </div>
+        <div class="rule-box">
+            <h2>Warm-up</h2>
+            <ul>
+                <li>Each player starts with 60 points.</li>
+                <li>About 20 questions. Players "raise hands" to answer.</li>
+                <li>Correct: <strong>+10 points</strong>.</li>
+                <li>Incorrect: <strong>-10 points</strong>.</li>
+                <li>Referee adds/deducts points.</li>
+            </ul>
+        </div>
+        <div class="rule-box">
+            <h2>Assessment Session</h2>
+            <ul>
+                <li>Questions have pre-defined point values.</li>
+                <li>Players answer in the established sequence.</li>
+                <li>Correct answer gains points. Wrong answer loses points.</li>
+                <li>You can nominate another player to help. If they answer correctly, the helper gets the points; otherwise, both lose points.</li>
+            </ul>
+        </div>
+        <div class="rule-box">
+            <h2>Punishment</h2>
+            <ul>
+                <li>The bottom four players (as a group) will choose a "TASK" for further development.</li>
+            </ul>
+        </div>
+        <div class="rule-box">
+            <h2>Rewards</h2>
+            <ul>
+                <li>Players with 120 or more points can relax and don't need to answer more questions.</li>
+            </ul>
+        </div>
     </div>
-    <script>
-        fetch('rules.txt')
-            .then(response => response.text())
-            .then(text => {
-                const rulesContainer = document.getElementById('rules-container');
-                const sections = text.split('\n\n');
-                sections.forEach(section => {
-                    const lines = section.split('\n');
-                    const title = lines[0].replace('[', '').replace(']', '');
-                    const ruleBox = document.createElement('div');
-                    ruleBox.className = 'rule-box';
-                    const h2 = document.createElement('h2');
-                    h2.textContent = title;
-                    ruleBox.appendChild(h2);
-                    const ul = document.createElement('ul');
-                    for (let i = 1; i < lines.length; i++) {
-                        const li = document.createElement('li');
-                        li.innerHTML = lines[i].substring(2).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                        ul.appendChild(li);
-                    }
-                    ruleBox.appendChild(ul);
-                    rulesContainer.appendChild(ruleBox);
-                });
-            });
-    </script>
 </body>
 </html>
