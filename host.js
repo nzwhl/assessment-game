@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileNameDisplay = document.getElementById('file-name-display');
     const loadQuestionsSection = document.getElementById('load-questions-section');
     const questionsLoadedMessage = document.getElementById('questions-loaded-message');
+    const hostNameInput = document.getElementById('host-name');
 
     // Game section
     const setupSection = document.getElementById('setup-section');
@@ -36,6 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let questions = []; // Initialize as empty, will be loaded or fetched
     let currentQuestionIndex = parseInt(localStorage.getItem('currentQuestionIndex')) || 0;
     let gameStarted = localStorage.getItem('gameStarted') === 'true';
+    let gameLog = [];
+
+    if (gameStarted) {
+        gameLog = JSON.parse(localStorage.getItem('gameLog')) || [];
+    }
+
+    function logEvent(type, data) {
+        gameLog.push({ timestamp: new Date().toISOString(), type, data });
+        localStorage.setItem('gameLog', JSON.stringify(gameLog));
+    }
 
     // Player list display
     const playerList = document.getElementById('player-list');
@@ -84,9 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (name) {
             const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
             const color = `hsl(${Math.random() * 360}, 70%, 50%)`;
-            players.push({ name, initials, color, score: 60 });
+            const player = { name, initials, color, score: 60 };
+            players.push(player);
             playerNameInput.value = '';
             localStorage.setItem('players', JSON.stringify(players));
+            logEvent('addPlayer', { player });
             renderPlayerList();
         }
     }
@@ -172,10 +185,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function startGameLogic() {
+        const hostName = hostNameInput.value.trim();
+        localStorage.setItem('hostName', hostName); // Save host name to localStorage
         localStorage.setItem('questions', JSON.stringify(questions));
         localStorage.setItem('players', JSON.stringify(players));
         localStorage.setItem('currentQuestionIndex', currentQuestionIndex.toString());
         localStorage.setItem('gameStarted', 'true');
+        logEvent('startGame', { questions, players, hostName }); // Pass hostName to log
         console.log('Host: gameStarted set to true');
         setupSection.style.display = 'none';
         gameSection.style.display = 'block';
@@ -269,6 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function awardPoints(playerIndex, points) {
         players[playerIndex].score += points;
         localStorage.setItem('players', JSON.stringify(players));
+        logEvent('awardPoints', { playerIndex, points, questionIndex: currentQuestionIndex });
         updateHostView();
         localStorage.setItem('update', Date.now()); 
     }
@@ -295,10 +312,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     showAnswerButton.addEventListener('click', () => {
         localStorage.setItem('showAnswer', 'true');
+        logEvent('showAnswer', { questionIndex: currentQuestionIndex });
         localStorage.setItem('update', Date.now()); 
     });
 
     const endGameButton = document.getElementById('end-game');
+    const generateReportButton = document.getElementById('generate-report');
+
+    generateReportButton.addEventListener('click', () => {
+        window.open('report.html', '_blank');
+    });
 
     showScoreButton.addEventListener('click', () => {
         let showScore = localStorage.getItem('showScoreTable') === 'true';
@@ -312,10 +335,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     endGameButton.addEventListener('click', () => {
         if (confirm('Are you sure you want to end the game? This will clear all progress.')) {
-            localStorage.setItem('gameStarted', 'false');
-            localStorage.setItem('update', Date.now());
-            localStorage.clear();
-            location.reload();
+            logEvent('endGame', { players }); // Log the end game event first
+            const gameLogToKeep = JSON.stringify(gameLog); // Get the current gameLog
+            localStorage.clear(); // Clear all local storage
+            localStorage.setItem('gameLog', gameLogToKeep); // Restore the gameLog
+            localStorage.setItem('gameStarted', 'false'); // Set gameStarted to false
+            location.reload(); // Reload the page
         }
     });
 });

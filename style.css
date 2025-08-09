@@ -451,3 +451,12 @@ button#start-game:hover {
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
+.password-section input[type="password"],
+.host-name-section input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
