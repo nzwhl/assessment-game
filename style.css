@@ -394,10 +394,7 @@ button#start-game:hover {
     background-color: #f1f1f1;
 }
 
-.bottom-four {
-    background-color: #ffdddd; /* Light red for bottom four */
-    font-weight: bold;
-}
+
 
 /* Style for the pre-loaded questions message */
 #questions-loaded-message {
@@ -438,4 +435,19 @@ button#start-game:hover {
     background-color: #f8f9fa; /* Light grey background */
     border: 1px solid #dee2e6; /* Grey border */
     border-radius: 8px;
+}
+
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.task-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }

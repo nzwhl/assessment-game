@@ -98,7 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const warmupCount = questionData[activeSheet].filter(q => q.type === 'warmup').length;
         const assessmentCount = questionData[activeSheet].filter(q => q.type === 'assessment').length;
-        summarySection.textContent = `Warm-up: ${warmupCount} | Assessment: ${assessmentCount}`;
+        const challengeCount = questionData[activeSheet].filter(q => q.type === 'challenge').length;
+        summarySection.textContent = `Warm-up: ${warmupCount} | Assessment: ${assessmentCount} | Challenge: ${challengeCount}`;
     }
 
     function clearForm() {
@@ -106,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
         optionsInput.value = '';
         answerInput.value = '';
         pointsInput.value = '10';
-        questionTypeInput.selectedIndex = 0;
         questionInput.focus();
         addQuestionButton.textContent = 'Add Question';
         editIndex = null;
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    function deleteQuestion(index) {
+    window.deleteQuestion = (index) => {
         if (confirm('Are you sure you want to delete this question?')) {
             questionData[activeSheet].splice(index, 1);
             renderPreview();
@@ -135,6 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
             saveToStorage();
         }
     };
+
+    questionTypeInput.addEventListener('change', () => {
+        const isChallenge = questionTypeInput.value === 'challenge';
+        answerInput.disabled = isChallenge;
+        optionsInput.disabled = isChallenge;
+        pointsInput.disabled = isChallenge;
+    });
 
     addQuestionButton.addEventListener('click', () => {
         const sheetName = sheetNameInput.value.trim();
@@ -155,8 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
             points: parseInt(pointsInput.value) || 0
         };
 
-        if (!question.question || !question.answer) {
-            alert('Question and Answer fields are required.');
+        if (question.type === 'warmup' && (!question.question || !question.answer)) {
+            alert('Question and Answer fields are required for warm-up questions.');
+            return;
+        } else if (question.type === 'assessment' && !question.question) {
+            alert('Question field is required for assessment questions.');
+            return;
+        } else if (question.type === 'challenge' && !question.question) {
+            alert('Question field is required for challenges.');
             return;
         }
 

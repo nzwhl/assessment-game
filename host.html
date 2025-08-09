@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assessment Game - Referee</title>
+    <title>Assessment Game - Host</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="top-banner" style="background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); padding: 20px; text-align: center; color: white; font-size: 2.5em; font-weight: bold;">
-        VAD Team Skills Assessment
+        Team Skills Assessment
     </div>
     <div class="container" style="margin-top: 80px;">
-        <h1>Referee Control Panel</h1>
+        <h1>Host Control Panel</h1>
         
         <div id="setup-section">
             <h2>Game Setup</h2>
@@ -47,6 +47,10 @@
                 </div>
             </div>
 
+            <div class="password-section">
+                <h3>Create a Password for the Game (min 5 characters)</h3>
+                <input type="password" id="game-password" minlength="5" placeholder="Enter password">
+            </div>
             <button id="start-game">Start Game</button>
         </div>
 

@@ -93,15 +93,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (jsonData.length > 0) {
             const firstRow = jsonData[0];
-            const requiredCols = ['type', 'question', 'answer', 'points'];
+            const requiredCols = ['type', 'question'];
             if (!requiredCols.every(col => col in firstRow)) {
-                alert(`Sheet '${sheetName}' is missing one of the required columns: type, question, answer, points.`);
+                alert(`Sheet '${sheetName}' is missing one of the required columns: type, question.`);
                 return;
             }
         }
 
         const warmups = jsonData.filter(q => q.type === 'warmup');
         const assessments = jsonData.filter(q => q.type === 'assessment');
+        const challenges = jsonData.filter(q => q.type === 'challenge');
         finalJson = [];
 
         if (warmups.length > 0) {
@@ -110,8 +111,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (assessments.length > 0) {
-            finalJson.push({ type: 'intro-assessment', question: 'Assessment Phase', points: 0 });
+            finalJson.push({ type: 'intro-assessment', question: 'Assessment Round', points: 0 });
             finalJson.push(...assessments.map(formatQuestion));
+        }
+
+        if (challenges.length > 0) {
+            finalJson.push({ type: 'intro-challenge', question: 'Challenge Round', points: 0 });
+            finalJson.push(...challenges.map(formatQuestion));
         }
 
         jsonPreview.textContent = JSON.stringify(finalJson, null, 2);

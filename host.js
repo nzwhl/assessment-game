@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Password protection
+    const password = localStorage.getItem('gamePassword');
+    if (password) {
+        const enteredPassword = prompt('Enter the password to access the host panel:');
+        if (enteredPassword !== password) {
+            alert('Incorrect password. You will be redirected to the main page.');
+            window.location.href = 'index.html';
+            return;
+        }
+    }
+
     // Setup section
     const playerNameInput = document.getElementById('player-name');
     const addPlayerButton = document.getElementById('add-player');
@@ -134,10 +145,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     startGameButton.addEventListener('click', () => {
+        const password = document.getElementById('game-password').value;
+        if (password.length < 5) {
+            alert('Password must be at least 5 characters long.');
+            return;
+        }
+
         if (players.length === 0) {
             alert('Please add at least one player before starting the game.');
             return;
         }
+
+        localStorage.setItem('gamePassword', password);
 
         const storedQuestions = localStorage.getItem('questionsForGame');
 
@@ -148,21 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (questions.length > 0) {
             startGameLogic();
         } else {
-            fetch('questions.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    questions = data;
-                    startGameLogic();
-                })
-                .catch(error => {
-                    alert('Error loading questions.json. Please make sure the file exists or use the Assessment Importer to start a game directly.');
-                    console.error('Error loading questions.json:', error);
-                });
+            alert('Please load a questions file before starting the game.');
         }
     });
 
@@ -187,12 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
             refAnswer.textContent = 'Click Next to Continue';
             playerControls.innerHTML = '';
         } else {
-            currentPhase.textContent = question.type === 'warmup' ? 'Warm-up Round' : 'Assessment Task';
+            currentPhase.textContent = question.type === 'warmup' ? 'Warm-up Round' : (question.type === 'assessment' ? 'Assessment Task' : 'Challenge Task');
             refQuestion.textContent = question.question;
             refAnswer.textContent = question.answer;
 
             const warmUpQuestions = questions.filter(q => q.type === 'warmup');
             const assessmentQuestions = questions.filter(q => q.type === 'assessment');
+            const challengeQuestions = questions.filter(q => q.type === 'challenge');
 
             let currentIndex = 0;
             let totalQuestions = 0;
@@ -206,13 +212,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentIndex = assessmentQuestions.indexOf(question) + 1;
                 totalQuestions = assessmentQuestions.length;
                 phaseText = 'assessment questions';
+            } else if (question.type === 'challenge') {
+                currentIndex = challengeQuestions.indexOf(question) + 1;
+                totalQuestions = challengeQuestions.length;
+                phaseText = 'challenges';
             }
             currentPhase.textContent += ` (${currentIndex}/${totalQuestions} ${phaseText})`;
 
             playerControls.innerHTML = '';
             players.forEach((player, index) => {
                 const playerDiv = document.createElement('div');
-                playerDiv.innerHTML = `<strong>${player.name}</strong>: ${player.score} points`;
+                const playerName = document.createElement('strong');
+                playerName.textContent = player.name;
+                if (player.score >= 120) {
+                    playerName.style.color = 'green';
+                }
+                playerDiv.appendChild(playerName);
+                playerDiv.append(`: ${player.score} points`);
+
 
                 if (question.type === 'warmup') {
                     const correctButton = document.createElement('button');
@@ -227,9 +244,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     const pointsInput = document.createElement('input');
                     pointsInput.type = 'number';
+                    pointsInput.step = '5';
                     pointsInput.placeholder = 'Points';
                     const awardButton = document.createElement('button');
                     awardButton.textContent = 'Award';
+                    if (player.score >= 120) {
+                        awardButton.disabled = true;
+                        awardButton.style.backgroundColor = 'grey';
+                    }
                     awardButton.onclick = () => {
                         const points = parseInt(pointsInput.value);
                         if (!isNaN(points)) {

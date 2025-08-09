@@ -74,26 +74,27 @@
 </head>
 <body>
     <div style="background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); padding: 20px; text-align: center; color: white; font-size: 2.5em; font-weight: bold; margin-bottom: 20px; border-radius: 8px;">
-        VAD Team Skills Assessment
+        Team Skills Assessment
     </div>
     <h1>Welcome to the Assessment Game!</h1>
 
     <div class="section">
         <p>This is an interactive game designed to facilitate engaging assessment sessions, whether for warm-ups or more formal evaluations. It allows for dynamic question display, player tracking, and score management.</p>
+        <p>The goal of this game-like skill assessment is to provide a fun and engaging method for evaluation. It emphasizes key features such as interactivity, knowledge sharing, fairness, and inspiration, while promoting learning and self-assessment.</p>
     </div>
 
     <div class="section">
         <h2>Preparing Your Questions</h2>
-        <p>Questions for the game are loaded from a JSON file. You can either create this file manually or use the provided importer tool.</p>
+        <p>There are two steps to prepare your questions for the game:</p>
         <ol>
-            <li><strong>Manual JSON:</strong> Create a <code>questions.json</code> file in the same directory as the game files. The structure should be an array of question objects, each with properties like <code>question</code>, <code>answer</code>, <code>type</code> (e.g., "warmup", "assessment", "intro-card"), <code>points</code>, and optionally <code>options</code> for multiple-choice questions.</li>
-            <li><strong>Using the Importer:</strong> For easier question preparation, use the <a href="import.html" target="_blank">Assessment Importer</a>. This tool helps you convert questions from a spreadsheet format (e.g., Excel) into the required JSON structure.</li>
+            <li><strong>Create Questions:</strong> Go to the <a href="create.html" target="_blank">Create Questions</a> page to create an Excel file with the required titles and columns. You can then export this Excel sheet from that page.</li>
+            <li><strong>Import Questions:</strong> Use the <a href="import.html" target="_blank">Assessment Importer</a> to import the questions from the Excel file you created. From the importer, you can either use the questions directly in the game or export them as a JSON file for later use.</li>
         </ol>
     </div>
 
     <div class="section">
         <h2>Running the Game</h2>
-        <p>To run the game, you need a local web server. If you're using Python, navigate to the game directory in your terminal and run <code>python -m http.server 8000</code>. Then, open the following links in your browser:</p>
+        <p>The game is hosted on Azure Static Web App. You can access it directly through the provided URL.</p>
         <ol>
             <li><strong>Host Page:</strong> This is for the game referee or host to control the flow of the game, add players, load questions, and manage scores.</li>
             <li><strong>Display Page:</strong> This page is meant to be shown to the audience or players, displaying the current question, player progress, and scores.</li>
@@ -119,8 +120,8 @@
                 <a href="import.html" target="_blank">Go to Importer</a>
             </div>
             <div class="link-box">
-                <h3>Create Questions (Legacy)</h3>
-                <p>An older interface for manually creating questions. The Importer is generally recommended for bulk question entry.</p>
+                <h3>Create Questions</h3>
+                <p>An interface for manually creating questions and exporting them to an Excel file.</p>
                 <a href="create.html" target="_blank">Go to Create Questions</a>
             </div>
             <div class="link-box">

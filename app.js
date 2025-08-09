@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (questions.length > 0 && questions[currentQuestionIndex]) {
                 const question = questions[currentQuestionIndex];
 
+                
+
+                
+
                 // Handle intro cards
                 if (question.type.startsWith('intro-')) {
                     gamePhase.textContent = ''; // Clear phase text for intro cards
@@ -56,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('point-scale-container').style.display = 'none';
                     scoreTableContainer.style.display = 'none'; // Hide score table for intro cards
                 } else {
-                    gamePhase.textContent = question.type === 'warmup' ? 'Warm-up Round' : 'Assessment Task';
+                    gamePhase.textContent = question.type === 'warmup' ? 'Warm-up Round' : (question.type === 'assessment' ? 'Assessment Task' : 'Challenge Task');
                     playersContainer.style.display = 'block'; // Show players for regular questions
                     document.getElementById('point-scale-container').style.display = 'block';
                     scoreTableContainer.style.display = showScoreTable ? 'block' : 'none'; // Control visibility based on flag
@@ -101,6 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentIndex = assessmentQuestions.indexOf(question) + 1;
                         totalQuestions = assessmentQuestions.length;
                         phaseText = 'assessment questions';
+                    } else if (question.type === 'challenge') {
+                        const challengeQuestions = questions.filter(q => q.type === 'challenge');
+                        currentIndex = challengeQuestions.indexOf(question) + 1;
+                        totalQuestions = challengeQuestions.length;
+                        phaseText = 'challenges';
                     }
                     gamePhase.textContent += ` (${currentIndex}/${totalQuestions} ${phaseText})`;
                 }
@@ -147,15 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Score Table Display
             if (showScoreTable) {
-                // Sort players by score in descending order
                 const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
 
                 let tableHTML = '<table class="score-table"><thead><tr><th>Rank</th><th>Player</th><th>Score</th></tr></thead><tbody>';
                 sortedPlayers.forEach((player, index) => {
-                    // Highlight bottom four based on sorted order
-                    const isBottomFour = index >= sortedPlayers.length - 4;
-                    const rowClass = isBottomFour ? 'bottom-four' : '';
-                    tableHTML += `<tr class="${rowClass}"><td>${index + 1}</td><td>${player.name}</td><td>${player.score}</td></tr>`;
+                    tableHTML += `<tr><td>${index + 1}</td><td>${player.name}</td><td>${player.score}</td></tr>`;
                 });
                 tableHTML += '</tbody></table>';
                 scoreTableContainer.innerHTML = tableHTML;
