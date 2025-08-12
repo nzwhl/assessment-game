@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateHostView();
     } else {
         // Check if questions are pre-loaded from importer
-        if (localStorage.getItem('questionsForGame')) {
+        if (sessionStorage.getItem('questionsForGame')) {
             loadQuestionsSection.style.display = 'none';
             questionsLoadedMessage.style.display = 'block';
         } else {
@@ -171,11 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         localStorage.setItem('gamePassword', password);
 
-        const storedQuestions = localStorage.getItem('questionsForGame');
+        const storedQuestions = sessionStorage.getItem('questionsForGame');
 
         if (storedQuestions) {
             questions = JSON.parse(storedQuestions);
-            localStorage.removeItem('questionsForGame');
+            sessionStorage.removeItem('questionsForGame');
             startGameLogic();
         } else if (questions.length > 0) {
             startGameLogic();

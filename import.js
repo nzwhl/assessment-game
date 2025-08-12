@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedSheetName = '';
 
     function loadFromStorage() {
-        const fileDataUrl = localStorage.getItem('importerFileData');
-        const filename = localStorage.getItem('importerFilename');
-        const selectedSheet = localStorage.getItem('importerSelectedSheet');
+        const fileDataUrl = sessionStorage.getItem('importerFileData');
+        const filename = sessionStorage.getItem('importerFilename');
+        const selectedSheet = sessionStorage.getItem('importerSelectedSheet');
 
         if (fileDataUrl && filename) {
             originalFilename = filename.replace(/\.[^/.]+$/, ""); // Remove extension
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             } catch (e) {
                 console.error("Error reading workbook from localStorage", e);
-                localStorage.removeItem('importerFileData');
-                localStorage.removeItem('importerFilename');
-                localStorage.removeItem('importerSelectedSheet');
+                sessionStorage.removeItem('importerFileData');
+                sessionStorage.removeItem('importerFilename');
+                sessionStorage.removeItem('importerSelectedSheet');
             }
         }
     }
@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.onload = (event) => {
             const fileDataUrl = event.target.result;
             
-            localStorage.setItem('importerFileData', fileDataUrl);
-            localStorage.setItem('importerFilename', file.name);
-            localStorage.removeItem('importerSelectedSheet');
+            sessionStorage.setItem('importerFileData', fileDataUrl);
+            sessionStorage.setItem('importerFilename', file.name);
+            sessionStorage.removeItem('importerSelectedSheet');
 
             const b64 = fileDataUrl.split(',')[1];
             workbook = XLSX.read(b64, { type: 'base64' });
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function processSheet(sheetName) {
         selectedSheetName = sheetName;
-        localStorage.setItem('importerSelectedSheet', sheetName);
+        sessionStorage.setItem('importerSelectedSheet', sheetName);
 
         Array.from(sheetButtonsContainer.children).forEach(btn => {
             btn.classList.toggle('active', btn.textContent === sheetName);
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     startGameButton.addEventListener('click', () => {
-        localStorage.setItem('questionsForGame', JSON.stringify(finalJson));
+        sessionStorage.setItem('questionsForGame', JSON.stringify(finalJson));
         window.open('host.html', '_blank');
     });
 
